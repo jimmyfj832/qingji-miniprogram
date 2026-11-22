@@ -1,0 +1,78 @@
+<view class="page">
+
+  <!-- 第一行筛选：月份 + 收支类型 -->
+  <view class="filters">
+    <picker mode="date" fields="month" value="{{ym}}" end="{{maxMonth}}" bindchange="onMonth">
+      <view class="pill">{{monthText}} <text class="pill-arrow">▾</text></view>
+    </picker>
+
+    <view class="seg seg-mini">
+      <view class="seg-i {{filterType === 'all' ? 'on' : ''}}" data-t="all" bindtap="onType">全部</view>
+      <view class="seg-i {{filterType === 'out' ? 'on' : ''}}" data-t="out" bindtap="onType">支出</view>
+      <view class="seg-i {{filterType === 'in' ? 'on' : ''}}" data-t="in" bindtap="onType">收入</view>
+    </view>
+  </view>
+
+  <!-- 第二行筛选：分类 + 搜索 -->
+  <view class="filters2">
+    <picker range="{{catNames}}" value="{{catIdx}}" bindchange="onCat">
+      <view class="pill">{{catNames[catIdx]}} <text class="pill-arrow">▾</text></view>
+    </picker>
+
+    <view class="search">
+      <text class="s-ico">🔍</text>
+      <input
+        class="s-input"
+        value="{{keyword}}"
+        placeholder="搜索备注或分类"
+        placeholder-class="s-ph"
+        confirm-type="search"
+        bindinput="onSearch"
+      />
+      <text wx:if="{{keyword}}" class="s-clear" bindtap="clearSearch">✕</text>
+    </view>
+  </view>
+
+  <!-- 汇总条 -->
+  <view class="sum-bar">
+    <text class="sb-item">共 <text class="sb-num">{{count}}</text> 笔</text>
+    <text class="sb-item">支出 <text class="sb-num">{{totalOutText}}</text></text>
+    <text class="sb-item">收入 <text class="sb-num">{{totalInText}}</text></text>
+  </view>
+
+  <!-- 分组列表 -->
+  <view class="group" wx:for="{{groups}}" wx:key="date">
+    <view class="group-head">
+      <text class="gh-date">{{item.label}}</text>
+      <text class="gh-sum">{{item.sumText}}</text>
+    </view>
+
+    <view class="card list-card">
+      <view
+        class="rec"
+        wx:for="{{item.items}}"
+        wx:for-item="rec"
+        wx:key="id"
+        data-id="{{rec.id}}"
+        bindtap="onRec"
+      >
+        <view class="rec-ico" style="background:{{rec.bg}}">{{rec.icon}}</view>
+        <view class="rec-main">
+          <text class="rec-cat">{{rec.cat}}</text>
+          <text class="rec-sub">{{rec.subText}}</text>
+        </view>
+        <view class="rec-right">
+          <text class="rec-amt {{rec.type === 'in' ? 'in' : 'out'}}">{{rec.amountText}}</text>
+          <text wx:if="{{rec.imgCount}}" class="rec-imgtag">📎 {{rec.imgCount}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:if="{{!groups.length && !loading}}" class="empty-big">
+    <text class="eb-ico">🧾</text>
+    <text class="eb-txt">没有符合条件的记录</text>
+  </view>
+
+</view>

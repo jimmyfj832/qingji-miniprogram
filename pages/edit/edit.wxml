@@ -1,0 +1,101 @@
+<view class="edit-page">
+
+  <!-- 类型切换 -->
+  <view class="type-switch">
+    <view class="ts {{type === 'out' ? 'on out' : ''}}" data-t="out" bindtap="onType">支出</view>
+    <view class="ts {{type === 'in' ? 'on in' : ''}}" data-t="in" bindtap="onType">收入</view>
+  </view>
+
+  <!-- 金额 -->
+  <view class="amount-card">
+    <text class="ac-cur">¥</text>
+    <input
+      class="ac-input {{type === 'in' ? 'in' : ''}}"
+      type="digit"
+      value="{{amount}}"
+      placeholder="0.00"
+      placeholder-class="ac-ph"
+      focus="{{autoFocus}}"
+      bindinput="onAmount"
+    />
+  </view>
+
+  <!-- 分类 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">选择分类</text>
+    </view>
+    <view class="cat-grid">
+      <view
+        class="cat {{cat === item.name ? 'on' : ''}}"
+        wx:for="{{cats}}"
+        wx:key="name"
+        data-n="{{item.name}}"
+        bindtap="onCat"
+      >
+        <view
+          class="cat-ico"
+          style="background:{{cat === item.name ? item.color : '#f4f5fb'}}"
+        >{{item.icon}}</view>
+        <text class="cat-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日期 / 备注 -->
+  <view class="card form">
+    <view class="form-row">
+      <text class="fl">日期</text>
+      <picker mode="date" value="{{date}}" end="{{today}}" bindchange="onDate">
+        <view class="fv">{{date}} <text class="fv-arrow">›</text></view>
+      </picker>
+    </view>
+
+    <view class="form-row">
+      <text class="fl">备注</text>
+      <input
+        class="fv-input"
+        value="{{note}}"
+        placeholder="写点什么（可选）"
+        placeholder-class="fv-ph"
+        maxlength="40"
+        bindinput="onNote"
+      />
+    </view>
+  </view>
+
+  <!-- 凭证图片 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">凭证图片</text>
+      <text class="card-more">最多 {{maxImgs}} 张，自动压缩</text>
+    </view>
+
+    <view class="thumb-grid">
+      <view class="thumb" wx:for="{{imgs}}" wx:key="path">
+        <image
+          class="thumb-img"
+          src="{{item.path}}"
+          mode="aspectFill"
+          data-i="{{index}}"
+          bindtap="previewImg"
+        />
+        <view class="thumb-del" data-i="{{index}}" catchtap="delImg">×</view>
+      </view>
+
+      <view wx:if="{{imgs.length < maxImgs}}" class="thumb-add" bindtap="chooseImg">
+        <text class="ta-plus">＋</text>
+        <text class="ta-txt">{{imgs.length}}/{{maxImgs}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="foot">
+    <view wx:if="{{isEdit}}" class="foot-del" bindtap="onDelete">删除</view>
+    <view class="foot-save {{saving ? 'disabled' : ''}}" bindtap="onSave">
+      {{saving ? '保存中…' : '保存'}}
+    </view>
+  </view>
+
+</view>

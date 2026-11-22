@@ -1,0 +1,79 @@
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 -8rpx 30rpx rgba(60, 66, 120, 0.07);
+  z-index: 100;
+}
+
+.tb-item {
+  flex: 1;
+  height: 104rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tb-ico {
+  font-size: 33rpx;
+  line-height: 1;
+  opacity: 0.45;
+  filter: grayscale(1);
+  transition: all 0.18s;
+}
+
+.tb-item.on .tb-ico {
+  opacity: 1;
+  filter: none;
+}
+
+.tb-txt {
+  font-size: 20rpx;
+  color: #8a90a6;
+  margin-top: 6rpx;
+  transition: color 0.18s;
+}
+
+.tb-item.on .tb-txt {
+  color: #6366f1;
+  font-weight: 600;
+}
+
+/* 中间新增按钮 */
+.tb-add {
+  flex: 1;
+  height: 104rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tb-add-btn {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10rpx 26rpx rgba(99, 102, 241, 0.4);
+  transform: translateY(-16rpx);
+}
+
+.tb-add-btn:active {
+  transform: translateY(-16rpx) scale(0.94);
+}
+
+.tb-add-ico {
+  color: #fff;
+  font-size: 44rpx;
+  line-height: 1;
+  font-weight: 300;
+  margin-top: -4rpx;
+}

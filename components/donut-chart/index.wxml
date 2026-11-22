@@ -1,0 +1,8 @@
+<!-- 环形图：Canvas 2D 绘制，中心文字用 WXML 叠加（比在 canvas 里画字更好排版） -->
+<view class="donut">
+  <canvas type="2d" id="donutCanvas" class="donut-canvas"></canvas>
+  <view class="donut-center">
+    <text class="dc-label">{{centerLabel}}</text>
+    <text class="dc-value">{{centerValue}}</text>
+  </view>
+</view>

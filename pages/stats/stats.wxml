@@ -1,0 +1,73 @@
+<view class="page">
+
+  <!-- 本月概览 -->
+  <view class="stat-cards">
+    <view class="sc">
+      <text class="sc-label">本月支出</text>
+      <text class="sc-value">¥{{expenseText}}</text>
+    </view>
+    <view class="sc">
+      <text class="sc-label">本月收入</text>
+      <text class="sc-value in">¥{{incomeText}}</text>
+    </view>
+    <view class="sc">
+      <text class="sc-label">月均支出</text>
+      <text class="sc-value">¥{{avgText}}</text>
+    </view>
+  </view>
+
+  <!-- 近 6 个月趋势 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">近 6 个月趋势</text>
+      <text class="card-more">{{trendMaxText}}</text>
+    </view>
+
+    <view class="chart">
+      <view class="bar-group" wx:for="{{trendRows}}" wx:key="ym">
+        <view class="bars">
+          <view class="bar bar-in" style="height:{{item.inH}}%"></view>
+          <view class="bar bar-out" style="height:{{item.outH}}%"></view>
+        </view>
+        <text class="bar-label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="chart-legend">
+      <view class="cl"><view class="cl-dot dot-in"></view><text>收入</text></view>
+      <view class="cl"><view class="cl-dot dot-out"></view><text>支出</text></view>
+    </view>
+  </view>
+
+  <!-- 分类排行 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">{{monthText}}分类排行</text>
+      <text class="card-more num">合计 {{catTotalText}}</text>
+    </view>
+
+    <view class="seg seg-type">
+      <view class="seg-i {{statType === 'out' ? 'on' : ''}}" data-t="out" bindtap="onStatType">支出</view>
+      <view class="seg-i {{statType === 'in' ? 'on' : ''}}" data-t="in" bindtap="onStatType">收入</view>
+    </view>
+
+    <block wx:if="{{cats.length}}">
+      <view class="rank" wx:for="{{cats}}" wx:key="name">
+        <view class="rk-top">
+          <text class="rk-name">{{item.icon}} {{item.name}}</text>
+          <text class="rk-amt num">{{item.amountText}}</text>
+        </view>
+        <view class="rk-bar">
+          <view class="rk-fill" style="width:{{item.barWidth}}%;background:{{item.color}}"></view>
+        </view>
+        <view class="rk-foot">
+          <text>{{item.count}} 笔</text>
+          <text class="num">{{item.pctText}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:else class="empty-mini">本月还没有{{statType === 'in' ? '收入' : '支出'}}记录</view>
+  </view>
+
+</view>

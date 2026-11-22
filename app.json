@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/dashboard/dashboard",
+    "pages/records/records",
+    "pages/stats/stats",
+    "pages/settings/settings",
+    "pages/edit/edit"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f4f5fb",
+    "navigationBarTitleText": "轻记",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f5fb",
+    "backgroundColorTop": "#f4f5fb",
+    "backgroundColorBottom": "#f4f5fb"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8a90a6",
+    "selectedColor": "#6366f1",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/dashboard/dashboard",
+        "text": "总览"
+      },
+      {
+        "pagePath": "pages/records/records",
+        "text": "明细"
+      },
+      {
+        "pagePath": "pages/stats/stats",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

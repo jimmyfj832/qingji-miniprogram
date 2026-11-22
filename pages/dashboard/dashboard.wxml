@@ -1,0 +1,113 @@
+<view class="page">
+
+  <!-- 月份切换 -->
+  <view class="month-bar">
+    <view class="mb-arrow" bindtap="prevMonth">‹</view>
+    <text class="mb-text">{{monthText}}</text>
+    <view class="mb-arrow {{canNext ? '' : 'disabled'}}" bindtap="nextMonth">›</view>
+  </view>
+
+  <!-- 结余主卡 -->
+  <view class="hero">
+    <view class="hero-glow"></view>
+    <text class="hero-label">本月结余</text>
+    <text class="hero-value {{balanceNeg ? 'neg' : ''}}">{{balanceText}}</text>
+
+    <view class="hero-foot">
+      <view class="hf-item">
+        <text class="hf-label">收入</text>
+        <text class="hf-val">+¥{{income}}</text>
+        <text class="hf-cmp cmp-{{cmpIncomeDir}}">{{cmpIncome}}</text>
+      </view>
+      <view class="hf-line"></view>
+      <view class="hf-item">
+        <text class="hf-label">支出</text>
+        <text class="hf-val">−¥{{expense}}</text>
+        <text class="hf-cmp cmp-{{cmpExpenseDir}}">{{cmpExpense}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预算 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">本月预算</text>
+      <text class="card-more" bindtap="goSettings">
+        {{budget.set ? '调整 ›' : '去设置 ›'}}
+      </text>
+    </view>
+
+    <block wx:if="{{budget.set}}">
+      <view class="bar-bg">
+        <view class="bar-fill {{budget.over ? 'over' : ''}}" style="width:{{budget.barWidth}}%"></view>
+      </view>
+      <view class="budget-foot">
+        <text class="{{budget.over ? 'out-color' : 'muted'}}">{{budget.leftText}}</text>
+        <text class="muted num">已用 {{budget.pct}}%</text>
+      </view>
+    </block>
+
+    <view wx:else class="empty-mini">设一个月度预算，超支一眼可见</view>
+  </view>
+
+  <!-- 支出构成 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">支出构成</text>
+      <text class="card-more" bindtap="goStats">统计 ›</text>
+    </view>
+
+    <block wx:if="{{hasData && donut.length}}">
+      <view class="donut-box">
+        <donut-chart
+          items="{{donut}}"
+          total="{{donutTotal}}"
+          center-label="总支出"
+          center-value="{{totalOutText}}"
+          thickness="{{16}}"
+        ></donut-chart>
+      </view>
+
+      <view class="legend">
+        <view class="lg" wx:for="{{donut}}" wx:key="name">
+          <view class="lg-dot" style="background:{{item.color}}"></view>
+          <text class="lg-name">{{item.icon}} {{item.name}}</text>
+          <text class="lg-pct num">{{item.pctText}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:else class="empty-mini">本月还没有支出记录</view>
+  </view>
+
+  <!-- 最近记录 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">最近记录</text>
+      <text class="card-more" bindtap="goRecords">全部 ›</text>
+    </view>
+
+    <block wx:if="{{recent.length}}">
+      <view
+        class="rec"
+        wx:for="{{recent}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goEdit"
+      >
+        <view class="rec-ico" style="background:{{item.bg}}">{{item.icon}}</view>
+        <view class="rec-main">
+          <text class="rec-cat">{{item.cat}}</text>
+          <text class="rec-sub">{{item.subText}} · {{item.date}}</text>
+        </view>
+        <view class="rec-right">
+          <text class="rec-amt {{item.type === 'in' ? 'in' : 'out'}}">{{item.amountText}}</text>
+          <text wx:if="{{item.imgCount}}" class="rec-imgtag">📎 {{item.imgCount}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:else class="empty-mini">还没有记录，点下方 ＋ 记一笔</view>
+  </view>
+
+</view>

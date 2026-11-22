@@ -1,0 +1,114 @@
+/* ---------- 筛选区 ---------- */
+.filters,
+.filters2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  padding: 0 22rpx;
+  margin-right: 16rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  font-size: 25rpx;
+  color: var(--text);
+  white-space: nowrap;
+  box-shadow: 0 6rpx 20rpx rgba(60, 66, 120, 0.06);
+}
+
+.pill-arrow {
+  font-size: 18rpx;
+  color: var(--muted);
+  margin-left: 6rpx;
+}
+
+.seg-mini {
+  flex: 1;
+  padding: 4rpx;
+  border-radius: 18rpx;
+}
+
+.seg-mini .seg-i {
+  padding: 12rpx 0;
+  font-size: 24rpx;
+  border-radius: 14rpx;
+}
+
+/* 搜索框 */
+.search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  padding: 0 18rpx;
+  background: #fff;
+  border-radius: 18rpx;
+  box-shadow: 0 6rpx 20rpx rgba(60, 66, 120, 0.06);
+}
+
+.s-ico {
+  font-size: 22rpx;
+  opacity: 0.5;
+  margin-right: 10rpx;
+}
+
+.s-input {
+  flex: 1;
+  font-size: 25rpx;
+  height: 64rpx;
+  color: var(--text);
+}
+
+.s-ph {
+  color: #b6bacb;
+}
+
+.s-clear {
+  font-size: 22rpx;
+  color: var(--muted);
+  padding: 0 6rpx;
+}
+
+/* ---------- 汇总条 ---------- */
+.sum-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 4rpx 8rpx 18rpx;
+  font-size: 22rpx;
+  color: var(--muted);
+}
+
+.sb-num {
+  color: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 分组 ---------- */
+.group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8rpx 10rpx 14rpx;
+}
+
+.gh-date {
+  font-size: 23rpx;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.gh-sum {
+  font-size: 21rpx;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.list-card {
+  padding: 6rpx 28rpx;
+  margin-bottom: 22rpx;
+}

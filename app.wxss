@@ -1,0 +1,251 @@
+/* ==========================================================
+   全局样式与设计变量（对齐 Web 版 qingji 的视觉）
+   ========================================================== */
+
+page {
+  --primary: #6366f1;
+  --primary-2: #818cf8;
+  --primary-dark: #4f46e5;
+  --income: #10b981;
+  --expense: #ef4444;
+  --bg: #f4f5fb;
+  --card: #ffffff;
+  --text: #1f2437;
+  --muted: #8a90a6;
+  --line: #ecedf5;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+view, text, image, input, button, picker {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  line-height: normal;
+  font-size: inherit;
+  color: inherit;
+}
+
+button::after {
+  border: none;
+}
+
+/* ---------- 页面容器 ---------- */
+.page {
+  min-height: 100vh;
+  padding: 20rpx 24rpx 40rpx;
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+  background: var(--card);
+  border-radius: 34rpx;
+  padding: 30rpx 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 40rpx rgba(60, 66, 120, 0.06);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-more {
+  font-size: 24rpx;
+  color: var(--muted);
+}
+
+/* ---------- 记录行 ---------- */
+.rec {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+
+.rec:last-child {
+  border-bottom: none;
+}
+
+.rec-ico {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.rec-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-cat {
+  font-size: 29rpx;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rec-sub {
+  font-size: 23rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rec-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+.rec-amt {
+  font-size: 31rpx;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.rec-amt.in {
+  color: var(--income);
+}
+
+.rec-amt.out {
+  color: var(--text);
+}
+
+.rec-imgtag {
+  font-size: 20rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+
+/* ---------- 按钮 ---------- */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-size: 31rpx;
+  font-weight: 600;
+  box-shadow: 0 12rpx 28rpx rgba(99, 102, 241, 0.28);
+}
+
+.btn-primary.pressed {
+  opacity: 0.88;
+}
+
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 92rpx;
+  border-radius: 24rpx;
+  background: #fff;
+  color: var(--expense);
+  font-size: 31rpx;
+  font-weight: 600;
+  border: 1rpx solid var(--line);
+}
+
+/* ---------- 分段控件 ---------- */
+.seg {
+  display: flex;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 6rpx;
+  box-shadow: 0 8rpx 24rpx rgba(60, 66, 120, 0.06);
+}
+
+.seg-i {
+  flex: 1;
+  text-align: center;
+  padding: 14rpx 0;
+  font-size: 26rpx;
+  color: var(--muted);
+  border-radius: 16rpx;
+  transition: all 0.18s;
+}
+
+.seg-i.on {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- 空态 ---------- */
+.empty-mini {
+  text-align: center;
+  color: var(--muted);
+  font-size: 25rpx;
+  padding: 44rpx 0;
+}
+
+.empty-big {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 0;
+}
+
+.empty-big .eb-ico {
+  font-size: 80rpx;
+  opacity: 0.5;
+  margin-bottom: 20rpx;
+}
+
+.empty-big .eb-txt {
+  color: var(--muted);
+  font-size: 26rpx;
+}
+
+/* ---------- 通用文字 ---------- */
+.muted {
+  color: var(--muted);
+}
+
+.in-color {
+  color: var(--income);
+}
+
+.out-color {
+  color: var(--expense);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}

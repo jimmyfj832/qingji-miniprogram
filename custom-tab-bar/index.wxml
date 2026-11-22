@@ -1,0 +1,16 @@
+<view class="tabbar">
+  <block wx:for="{{list}}" wx:key="id">
+    <!-- 中间凸起的新增按钮 -->
+    <view wx:if="{{item.center}}" class="tb-add" data-index="{{index}}" bindtap="onTap">
+      <view class="tb-add-btn">
+        <text class="tb-add-ico">＋</text>
+      </view>
+    </view>
+
+    <!-- 普通 tab -->
+    <view wx:else class="tb-item {{selected === index ? 'on' : ''}}" data-index="{{index}}" bindtap="onTap">
+      <text class="tb-ico">{{item.icon}}</text>
+      <text class="tb-txt">{{item.text}}</text>
+    </view>
+  </block>
+</view>

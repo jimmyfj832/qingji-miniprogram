@@ -1,0 +1,14 @@
+# 工具生成的本地个人配置（含本机编译版本等，不纳入版本控制）
+project.private.config.json
+
+# 依赖
+node_modules/
+miniprogram_npm/
+
+# 系统与日志
+.DS_Store
+*.log
+
+# 编辑器
+.vscode/
+.idea/

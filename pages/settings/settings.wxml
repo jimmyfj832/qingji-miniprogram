@@ -1,0 +1,88 @@
+<view class="page">
+
+  <!-- 个人 -->
+  <view class="card profile">
+    <view class="avatar">{{avatarText}}</view>
+    <view class="pf-main">
+      <text class="pf-name">{{nick}}</text>
+      <text class="pf-sub">本地账本 · 数据保存在本机</text>
+    </view>
+    <view class="pf-edit" bindtap="openNick">修改</view>
+  </view>
+
+  <!-- 数据概览 -->
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">数据概览</text>
+      <text class="card-more">{{recordCount}} 条记录</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-k">累计支出</text>
+      <text class="kv-v">¥{{totalExpense}}</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-k">累计收入</text>
+      <text class="kv-v in-color">¥{{totalIncome}}</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-k">凭证图片</text>
+      <text class="kv-v">{{imgCount}} 张 · {{imgSize}}</text>
+    </view>
+  </view>
+
+  <!-- 设置项 -->
+  <view class="card list">
+    <view class="set-row" bindtap="openBudget">
+      <text class="sr-label">月度预算</text>
+      <view class="sr-right">
+        <text class="sr-val {{budgetSet ? '' : 'placeholder'}}">{{budgetText}}</text>
+        <text class="sr-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="set-row" bindtap="exportCsv">
+      <text class="sr-label">导出 CSV</text>
+      <view class="sr-right">
+        <text class="sr-val placeholder">复制到剪贴板</text>
+        <text class="sr-arrow">›</text>
+      </view>
+    </view>
+
+    <view class="set-row" bindtap="clearAll">
+      <text class="sr-label danger">清空所有记录</text>
+      <view class="sr-right">
+        <text class="sr-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="card about">
+    <text class="about-title">关于轻记</text>
+    <text class="about-p">版本 {{version}}</text>
+    <text class="about-p">账目、预算与凭证图片均保存在本机（微信小程序本地存储 + 文件系统），不经过网络，也不会自动同步到其他设备。</text>
+    <text class="about-p about-warn">换手机、卸载小程序或清除小程序数据会导致账目丢失，建议定期用「导出 CSV」备份。</text>
+    <text class="about-p">后续如需多设备同步，可切换为云开发存储：数据层已做适配隔离，切换时业务代码无需改动。</text>
+  </view>
+
+  <!-- 编辑弹层 -->
+  <view wx:if="{{modalShow}}" class="mask" bindtap="closeModal">
+    <view class="sheet" catchtap="noop">
+      <text class="sheet-title">{{modalTitle}}</text>
+      <input
+        class="sheet-input"
+        type="{{modalKeyboard}}"
+        value="{{modalValue}}"
+        placeholder="{{modalPlaceholder}}"
+        focus="{{modalShow}}"
+        bindinput="onModalInput"
+      />
+      <text class="sheet-hint">{{modalHint}}</text>
+      <view class="sheet-actions">
+        <view class="sa-cancel" bindtap="closeModal">取消</view>
+        <view class="sa-ok" bindtap="confirmModal">确定</view>
+      </view>
+    </view>
+  </view>
+
+</view>
