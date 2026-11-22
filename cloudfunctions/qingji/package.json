@@ -1,0 +1,10 @@
+{
+  "name": "qingji",
+  "version": "1.0.0",
+  "description": "轻记记账本云函数：账单与预算的增删改查（按 openid 隔离）",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -44,6 +44,7 @@
     }
   },
   "compileType": "miniprogram",
+  "cloudfunctionRoot": "cloudfunctions/",
   "appid": "touristappid",
   "projectname": "qingji-miniprogram",
   "condition": {},

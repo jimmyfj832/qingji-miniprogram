@@ -1,5 +1,6 @@
 const db = require('../../utils/db')
 const util = require('../../utils/util')
+const pref = require('../../utils/pref')
 const { catsOf } = require('../../utils/constants')
 
 const MAX_IMGS = 5
@@ -29,7 +30,8 @@ Page({
       today: today,
       date: today,
       cats: catsOf('out'),
-      cat: '',
+      // 新建时回填上次用过的分类，编辑时用记录自己的分类
+      cat: id ? '' : this.pickLastCat('out'),
       id: id,
       isEdit: !!id
     })
@@ -44,6 +46,17 @@ Page({
         that.setData({ autoFocus: true })
       }, 350)
     }
+  },
+
+  /** 取该类型上次用的分类；分类已被删除或不存在则返回空串 */
+  pickLastCat(type) {
+    const name = pref.getLastCat(type)
+    if (!name) return ''
+    const cats = catsOf(type)
+    for (let i = 0; i < cats.length; i++) {
+      if (cats[i].name === name) return name
+    }
+    return ''
   },
 
   async loadRecord(id) {
@@ -74,7 +87,8 @@ Page({
     this.setData({
       type: type,
       cats: catsOf(type),
-      cat: ''
+      // 新建时切换类型也跟着回填该类型上次的分类；编辑时清空让用户重选
+      cat: this.data.isEdit ? '' : this.pickLastCat(type)
     })
   },
 
@@ -190,6 +204,8 @@ Page({
         await db.updateRecord(payload)
       } else {
         await db.addRecord(payload)
+        // 仅新建时记住分类，编辑老账不污染使用习惯
+        pref.setLastCat(this.data.type, cat)
       }
 
       // 4. 清理被移除的旧图

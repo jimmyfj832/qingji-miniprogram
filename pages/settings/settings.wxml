@@ -5,7 +5,7 @@
     <view class="avatar">{{avatarText}}</view>
     <view class="pf-main">
       <text class="pf-name">{{nick}}</text>
-      <text class="pf-sub">本地账本 · 数据保存在本机</text>
+      <text class="pf-sub">{{modeTitle}} · {{modeSub}}</text>
     </view>
     <view class="pf-edit" bindtap="openNick">修改</view>
   </view>
@@ -60,9 +60,15 @@
   <view class="card about">
     <text class="about-title">关于轻记</text>
     <text class="about-p">版本 {{version}}</text>
-    <text class="about-p">账目、预算与凭证图片均保存在本机（微信小程序本地存储 + 文件系统），不经过网络，也不会自动同步到其他设备。</text>
-    <text class="about-p about-warn">换手机、卸载小程序或清除小程序数据会导致账目丢失，建议定期用「导出 CSV」备份。</text>
-    <text class="about-p">后续如需多设备同步，可切换为云开发存储：数据层已做适配隔离，切换时业务代码无需改动。</text>
+    <block wx:if="{{isCloud}}">
+      <text class="about-p">账目与预算保存在微信云开发数据库，凭证图片保存在云存储，换手机、重装小程序后数据仍在，多设备自动同步。</text>
+      <text class="about-p about-warn">云端数据按微信账号隔离，每条记录只有本人可读写；仍建议定期用「导出 CSV」做一份本地备份。</text>
+    </block>
+    <block wx:else>
+      <text class="about-p">账目、预算与凭证图片均保存在本机（微信小程序本地存储 + 文件系统），不经过网络，也不会自动同步到其他设备。</text>
+      <text class="about-p about-warn">换手机、卸载小程序或清除小程序数据会导致账目丢失，建议定期用「导出 CSV」备份。</text>
+      <text class="about-p">后续如需多设备同步，可切换为云开发存储：数据层已做适配隔离，切换时业务代码无需改动。</text>
+    </block>
   </view>
 
   <!-- 编辑弹层 -->

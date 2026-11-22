@@ -27,8 +27,14 @@
 const { STORAGE } = require('./constants')
 const { uid } = require('./util')
 const auth = require('./auth')
+const cfg = require('./config')
 
-const MODE = 'local' // 'local' | 'cloud'
+// 云模式但没填环境 ID 时强制回落本地，避免线上白屏
+const MODE = cfg.MODE === 'cloud' && cfg.CLOUD_ENV ? 'cloud' : 'local'
+
+if (cfg.MODE === 'cloud' && !cfg.CLOUD_ENV) {
+  console.warn('[qingji] config.MODE 为 cloud 但未填 CLOUD_ENV，已回落本地模式')
+}
 
 /* ================================================================
    本地实现
@@ -270,6 +276,9 @@ const local = {
    ================================================================ */
 
 function cloudCall(action, data) {
+  if (!wx.cloud) {
+    return Promise.reject(new Error('当前基础库不支持云开发，请升级微信客户端'))
+  }
   return wx.cloud
     .callFunction({ name: 'qingji', data: Object.assign({ action: action }, data || {}) })
     .then(function (res) {
@@ -340,7 +349,16 @@ const cloud = {
       return p && p.indexOf('cloud://') === 0
     })
     if (!list.length) return Promise.resolve()
-    return wx.cloud.deleteFile({ fileList: list }).then(function () {}).catch(function () {})
+    // cloud.deleteFile 单次上限 50 个，超过需分批
+    const chunks = []
+    for (let i = 0; i < list.length; i += 50) chunks.push(list.slice(i, i + 50))
+    return chunks
+      .reduce(function (prev, chunk) {
+        return prev.then(function () {
+          return wx.cloud.deleteFile({ fileList: chunk }).catch(function () {})
+        })
+      }, Promise.resolve())
+      .then(function () {})
   },
 
   imageUsage() {

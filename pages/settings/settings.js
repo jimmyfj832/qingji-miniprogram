@@ -5,6 +5,9 @@ const util = require('../../utils/util')
 
 const VERSION = '1.0.0'
 
+// 数据模式由 utils/config.js 决定，这里只做展示
+const IS_CLOUD = db.MODE === 'cloud'
+
 function sizeText(bytes) {
   const b = Number(bytes) || 0
   if (b < 1024) return b + ' B'
@@ -25,6 +28,11 @@ Page({
     imgCount: 0,
     imgSize: '0 B',
     version: VERSION,
+
+    // 数据模式展示（云模式不再说"保存在本机"，避免误导）
+    isCloud: IS_CLOUD,
+    modeTitle: IS_CLOUD ? '云端账本' : '本地账本',
+    modeSub: IS_CLOUD ? '多设备自动同步' : '数据保存在本机',
 
     modalShow: false,
     modalType: '',
