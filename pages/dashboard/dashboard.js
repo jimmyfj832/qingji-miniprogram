@@ -28,6 +28,7 @@ Page({
     hasData: false,
 
     recent: [],
+    isFirstUse: false,
     nick: '我',
     loading: true
   },
@@ -107,6 +108,8 @@ Page({
         totalOutText: util.fmt(sum.expense),
         hasData: month.length > 0,
         recent: recent,
+        // 全库一条记录都没有 → 首次使用，展示顶部引导卡
+        isFirstUse: all.length === 0,
         nick: auth.getProfile().nick || '我',
         loading: false
       })
