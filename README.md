@@ -28,6 +28,8 @@ qingji-miniprogram/
 ├── project.config.json               # 开发者工具项目配置
 ├── sitemap.json
 ├── LICENSE
+├── assets/
+│   └── icon/                         # 小程序图标（512/144 PNG + SVG 源文件）
 ├── custom-tab-bar/                   # 自定义 tabBar（5 格，中间凸起"记一笔"）
 ├── components/
 │   └── donut-chart/                  # 环形图（Canvas 2D）
