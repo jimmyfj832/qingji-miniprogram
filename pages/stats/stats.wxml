@@ -67,7 +67,12 @@
       </view>
     </block>
 
-    <view wx:else class="empty-mini">本月还没有{{statType === 'in' ? '收入' : '支出'}}记录</view>
+    <view wx:else class="es es-sm">
+      <text class="es-ico">📊</text>
+      <text class="es-title">本月还没有{{statType === 'in' ? '收入' : '支出'}}记录</text>
+      <text class="es-desc">记几笔账之后，这里会显示分类占比与排行</text>
+      <view class="es-btn ghost" bindtap="goAdd">去记一笔</view>
+    </view>
   </view>
 
 </view>

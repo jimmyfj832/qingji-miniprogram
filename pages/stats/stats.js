@@ -79,6 +79,11 @@ Page({
     if (typeof done === 'function') done()
   },
 
+  /** 空态出口：去记一笔 */
+  goAdd() {
+    wx.navigateTo({ url: '/pages/edit/edit' })
+  },
+
   applyCats() {
     const type = this.data.statType
     const month = this._month || []

@@ -15,6 +15,8 @@ Page({
 
     groups: [],
     count: 0,
+    allCount: 0,
+    hasFilter: false,
     totalOutText: '0.00',
     totalInText: '0.00',
     loading: true
@@ -89,6 +91,24 @@ Page({
     this.load()
   },
 
+  /** 空态出口：从未记账时直接去记第一笔 */
+  goAdd() {
+    wx.navigateTo({ url: '/pages/edit/edit' })
+  },
+
+  /** 空态出口：筛选无结果时清空全部条件并回到当前月 */
+  resetFilter() {
+    const now = util.currentMonth()
+    this.setData({
+      filterType: 'all',
+      catIdx: 0,
+      keyword: '',
+      ym: now,
+      monthText: util.monthLabel(now)
+    })
+    this.load()
+  },
+
   async load(done) {
     const ym = this.data.ym
     const type = this.data.filterType
@@ -124,6 +144,9 @@ Page({
       this.setData({
         groups: L.groupByDate(list),
         count: list.length,
+        allCount: all.length,
+        // 类型/分类/关键词任一非默认，才算「有筛选」；月份切换不算筛选
+        hasFilter: type !== 'all' || this.data.catIdx > 0 || !!kw,
         totalOutText: util.money(sum.expense),
         totalInText: util.money(sum.income),
         loading: false

@@ -107,7 +107,13 @@
       </view>
     </block>
 
-    <view wx:else class="empty-mini">还没有记录，点下方 ＋ 记一笔</view>
+    <!-- 首次使用 / 本月无记录：给一个明确的行动入口 -->
+    <view wx:else class="es">
+      <text class="es-ico">🧾</text>
+      <text class="es-title">还没有记过账</text>
+      <text class="es-desc">记下第一笔收支，这里会显示最近的记录</text>
+      <view class="es-btn" bindtap="goEdit">记第一笔</view>
+    </view>
   </view>
 
 </view>

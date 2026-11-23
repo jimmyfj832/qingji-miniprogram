@@ -69,10 +69,13 @@
     </view>
   </view>
 
-  <!-- 空态 -->
-  <view wx:if="{{!groups.length && !loading}}" class="empty-big">
-    <text class="eb-ico">🧾</text>
-    <text class="eb-txt">没有符合条件的记录</text>
+  <!-- 空态：区分「筛选无结果」与「这个月还没记」，两者给不同出口 -->
+  <view wx:if="{{!groups.length && !loading}}" class="es">
+    <text class="es-ico">{{hasFilter ? '🔍' : '🧾'}}</text>
+    <text class="es-title">{{hasFilter ? '没有符合条件的记录' : (allCount ? '这个月还没有记录' : '还没有记过账')}}</text>
+    <text class="es-desc">{{hasFilter ? '换个月份或类型看看，也可以清除当前筛选' : '记下第一笔收支，明细会按日期自动分组'}}</text>
+    <view wx:if="{{hasFilter}}" class="es-btn ghost" bindtap="resetFilter">清除筛选</view>
+    <view wx:else class="es-btn" bindtap="goAdd">记一笔</view>
   </view>
 
 </view>
