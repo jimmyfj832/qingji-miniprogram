@@ -32,7 +32,7 @@
   <view wx:if="{{isFirstUse && !loading}}" class="card">
     <view class="es">
       <text class="es-ico">🌱</text>
-      <text class="es-title">欢迎使用轻记</text>
+      <text class="es-title">欢迎使用苗苗记账</text>
       <text class="es-desc">记下第一笔收支，这里会自动生成月度汇总、消费构成和趋势图</text>
       <view class="es-btn" bindtap="goEdit">开始记第一笔</view>
     </view>

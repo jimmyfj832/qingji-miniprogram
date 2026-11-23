@@ -1,4 +1,4 @@
-# 轻记 · 记账小程序
+# 苗苗记账 · 微信记账小程序
 
 由 Web 版 [qingji](https://github.com/jimmyfj832/qingji) 移植的微信原生小程序，功能与视觉保持一致。
 

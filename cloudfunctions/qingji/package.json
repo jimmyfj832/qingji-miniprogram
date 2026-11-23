@@ -1,7 +1,7 @@
 {
   "name": "qingji",
   "version": "1.0.0",
-  "description": "轻记记账本云函数：账单与预算的增删改查（按 openid 隔离）",
+  "description": "苗苗记账云函数：账单与预算的增删改查（按 openid 隔离）",
   "main": "index.js",
   "private": true,
   "dependencies": {

@@ -58,7 +58,7 @@
 
   <!-- 说明 -->
   <view class="card about">
-    <text class="about-title">关于轻记</text>
+    <text class="about-title">关于苗苗记账</text>
     <text class="about-p">版本 {{version}}</text>
     <block wx:if="{{isCloud}}">
       <text class="about-p">账目与预算保存在微信云开发数据库，凭证图片保存在云存储，换手机、重装小程序后数据仍在，多设备自动同步。</text>
