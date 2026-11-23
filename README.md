@@ -56,7 +56,7 @@ qingji-miniprogram/
 
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 2. 打开工具 → 导入项目 → 选择本目录
-3. AppID 填自己的，或点「使用测试号」；`project.config.json` 里预置的是 `touristappid`（游客模式）
+3. **必须换成自己的 AppID**：改 `project.config.json` 的 `appid` 字段，或点「使用测试号」。仓库里带的是作者自己的 AppID，别人直接编译会提示无预览权限；`touristappid`（游客模式）不支持云开发与真机调试
 4. 编译即可，无需任何后端或依赖安装
 
 ## 数据存储方案
