@@ -1,5 +1,5 @@
 /**
- * 苗苗记账 · 云函数（action 路由）
+ * 小芽记账帮手 · 云函数（action 路由）
  * ------------------------------------------------------------------
  * 前端通过 wx.cloud.callFunction({ name:'qingji', data:{ action, ... } }) 调用。
  * 统一返回 { ok:true, data } 或 { ok:false, msg }。
