@@ -25,7 +25,8 @@
 ```
 qingji-miniprogram/
 ├── app.js / app.json / app.wxss      # 入口、全局配置、全局样式与设计变量
-├── project.config.json               # 开发者工具项目配置
+├── project.config.json               # 开发者工具项目配置（团队共享，appid 留空）
+├── project.private.config.example.json  # 私有配置模板：复制为 project.private.config.json 后填自己的 appid
 ├── sitemap.json
 ├── LICENSE
 ├── assets/
@@ -58,8 +59,10 @@ qingji-miniprogram/
 
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 2. 打开工具 → 导入项目 → 选择本目录
-3. **必须换成自己的 AppID**：改 `project.config.json` 的 `appid` 字段，或点「使用测试号」。仓库里带的是作者自己的 AppID，别人直接编译会提示无预览权限；`touristappid`（游客模式）不支持云开发与真机调试
+3. **填自己的 AppID**：把 `project.private.config.example.json` 复制为 `project.private.config.json`（已被 `.gitignore` 排除，不进版本库），在其中的 `appid` 字段填上自己的 AppID。也可以在开发者工具「详情 → 基本信息」里直接改 —— 只要私有文件里存在 `appid` 字段，工具就会写进私有文件，不会污染共享的 `project.config.json`。`project.config.json` 里的 `appid` 故意留空，避免 AppID 随仓库外传；`touristappid`（游客模式）不支持云开发与真机调试
 4. 编译即可，无需任何后端或依赖安装
+
+> **关于 AppID 的安全性**：AppID 是小程序的公开标识，会出现在小程序码、分享卡片和每个用户的请求里，本身不是密钥 —— 只有 AppSecret 才必须保密，任何人也不应把它写进客户端代码或提交到仓库。本仓库不含 AppSecret，服务端签名类调用一律在云函数里完成。
 
 ## 数据存储方案
 

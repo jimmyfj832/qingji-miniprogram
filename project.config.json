@@ -45,7 +45,7 @@
   },
   "compileType": "miniprogram",
   "cloudfunctionRoot": "cloudfunctions/",
-  "appid": "wxa892454e580a2f12",
+  "appid": "",
   "projectname": "qingji-miniprogram",
   "condition": {},
   "editorSetting": {

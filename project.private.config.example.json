@@ -1,0 +1,13 @@
+{
+  "appid": "",
+  "libVersion": "3.18.0",
+  "projectname": "qingji-miniprogram",
+  "condition": {},
+  "setting": {
+    "urlCheck": false,
+    "coverView": true,
+    "compileHotReLoad": true,
+    "checkInvalidKey": true,
+    "ignoreDevUnusedFiles": true
+  }
+}
