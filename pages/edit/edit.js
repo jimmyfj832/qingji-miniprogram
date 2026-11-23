@@ -132,7 +132,31 @@ Page({
         })
         that.setData({ imgs: next })
       },
-      fail() {}
+      fail(err) {
+        const msg = (err && err.errMsg) || ''
+        // 用户主动取消不提示
+        if (msg.indexOf('cancel') > -1) return
+        // 隐私协议未同意 / 相册相机权限被拒
+        if (msg.indexOf('privacy') > -1 || msg.indexOf('auth') > -1) {
+          wx.showModal({
+            title: '需要相册或相机权限',
+            content: '添加凭证图片需要访问相册或相机，你可以在设置中开启，或先同意隐私保护指引',
+            confirmText: '去设置',
+            cancelText: '暂不',
+            success(r) {
+              if (!r.confirm) return
+              wx.openSetting({
+                fail() {
+                  // 隐私指引未同意时 openSetting 不可用，引导重新触发授权
+                  wx.showToast({ title: '请重新点击添加图片', icon: 'none' })
+                }
+              })
+            }
+          })
+          return
+        }
+        wx.showToast({ title: '选择图片失败', icon: 'none' })
+      }
     })
   },
 
